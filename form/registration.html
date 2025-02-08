@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="registrationForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required />
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required />
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required />
+
+        <label>Gender:</label>
+        <div class="radio-container">
+          <input type="radio" id="male" name="gender" value="Male" required />
+          <label for="male">Male</label>
+        </div>
+        <div class="radio-container">
+          <input
+            type="radio"
+            id="female"
+            name="gender"
+            value="Female"
+            required
+          />
+          <label for="female">Female</label>
+        </div>
+
+        <label for="city">City:</label>
+        <select id="city" name="city" required>
+          <option value="Kyiv">Kyiv</option>
+          <option value="Lviv">Lviv</option>
+          <option value="Odesa">Odesa</option>
+        </select>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" required></textarea>
+
+        <label>Languages:</label>
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="ukrainian"
+            name="languages"
+            value="Ukrainian"
+          />
+          <label for="ukrainian">Ukrainian</label>
+        </div>
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="english"
+            name="languages"
+            value="English"
+          />
+          <label for="english">English</label>
+        </div>
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="russian"
+            name="languages"
+            value="Russian"
+          />
+          <label for="russian">Russian</label>
+        </div>
+
+        <button type="submit">Save</button>
+      </form>
+      <div id="result" style="display: none"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
