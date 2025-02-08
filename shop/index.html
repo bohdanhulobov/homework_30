@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="store mt-10">
+      <h2 class="text-2xl font-bold mb-4">Store</h2>
+    </div>
+    <div class="product-details hidden">
+      <button class="back-to-store btn">Back to Store</button>
+      <div class="slider mt-4">
+        <div class="slides"></div>
+      </div>
+      <div class="indicators-container">
+        <div class="indicators"></div>
+      </div>
+      <div class="controls-container">
+        <button class="prev btn">Prev</button>
+        <button class="pause-play btn">Pause</button>
+        <button class="next btn">Next</button>
+      </div>
+      <div class="product-description mt-4"></div>
+      <button class="btn mt-4" id="orderButton">Order</button>
+      <div class="order-form mt-4 hidden" id="orderFormContainer">
+        <h3 class="text-xl font-bold mb-2">Order Form</h3>
+        <form id="orderForm">
+          <div class="mb-2">
+            <label for="orderName" class="block">Name:</label>
+            <input
+              type="text"
+              id="orderName"
+              class="border p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label for="orderEmail" class="block">Email:</label>
+            <input
+              type="email"
+              id="orderEmail"
+              class="border p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label for="orderPhone" class="block">Phone Number:</label>
+            <input
+              type="tel"
+              id="orderPhone"
+              class="border p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label for="orderAddress" class="block">Address:</label>
+            <input
+              type="text"
+              id="orderAddress"
+              class="border p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label for="orderQuantity" class="block">Quantity:</label>
+            <input
+              type="number"
+              id="orderQuantity"
+              class="border p-2 w-full"
+              required
+            />
+          </div>
+          <div class="mb-2">
+            <label class="block">Preferred Contact Method:</label>
+            <div>
+              <input
+                type="radio"
+                id="contactEmail"
+                name="contactMethod"
+                value="Email"
+                required
+              />
+              <label for="contactEmail">Email</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="contactPhone"
+                name="contactMethod"
+                value="Phone"
+                required
+              />
+              <label for="contactPhone">Phone</label>
+            </div>
+          </div>
+          <div class="mb-2">
+            <label class="block">Additional Services:</label>
+            <div>
+              <input
+                type="checkbox"
+                id="serviceGiftWrap"
+                name="additionalServices"
+                value="Gift Wrap"
+              />
+              <label for="serviceGiftWrap">Gift Wrap</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="serviceInsurance"
+                name="additionalServices"
+                value="Insurance"
+              />
+              <label for="serviceInsurance">Insurance</label>
+            </div>
+          </div>
+          <button type="submit" class="btn p-2 mt-2">Submit Order</button>
+        </form>
+      </div>
+    </div>
+    <script src="js/store.js"></script>
+    <script src="js/slider.js"></script>
+  </body>
+</html>
