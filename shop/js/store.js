@@ -85,73 +85,88 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const orderButton = document.getElementById("orderButton");
   const orderFormContainer = document.getElementById("orderFormContainer");
+  const orderForm = document.getElementById("orderForm");
 
   orderButton.addEventListener("click", () => {
     orderFormContainer.classList.toggle("hidden");
   });
 
-  const orderForm = document.getElementById("orderForm");
+  function getOrderData() {
+    return {
+      name: document.getElementById("orderName").value,
+      email: document.getElementById("orderEmail").value,
+      phone: document.getElementById("orderPhone").value,
+      address: document.getElementById("orderAddress").value,
+      quantity: document.getElementById("orderQuantity").value,
+      contactMethod: document.querySelector(
+        'input[name="contactMethod"]:checked',
+      ).value,
+      additionalServices: Array.from(
+        document.querySelectorAll('input[name="additionalServices"]:checked'),
+      ).map((el) => el.value),
+    };
+  }
 
-  orderForm.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const name = document.getElementById("orderName").value;
-    const email = document.getElementById("orderEmail").value;
-    const phone = document.getElementById("orderPhone").value;
-    const address = document.getElementById("orderAddress").value;
-    const quantity = document.getElementById("orderQuantity").value;
-    const contactMethod = document.querySelector(
-      'input[name="contactMethod"]:checked',
-    ).value;
-    const additionalServices = Array.from(
-      document.querySelectorAll('input[name="additionalServices"]:checked'),
-    ).map((el) => el.value);
-
+  function validateOrderData(data) {
+    const errors = {};
     const nameRegExp = /^[A-Za-z\s]+$/;
     const emailRegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegExp = /^\+?\d{10,15}$/;
 
-    if (!nameRegExp.test(name)) {
-      alert("Name can only contain letters and spaces.");
-      return;
+    if (!nameRegExp.test(data.name)) {
+      errors.name = "Name can only contain letters and spaces.";
     }
 
-    if (!emailRegExp.test(email)) {
-      alert("Please enter a valid email address.");
-      return;
+    if (!emailRegExp.test(data.email)) {
+      errors.email = "Please enter a valid email address.";
     }
 
-    if (!phoneRegExp.test(phone)) {
-      alert("Please enter a valid phone number.");
-      return;
+    if (!phoneRegExp.test(data.phone)) {
+      errors.phone = "Please enter a valid phone number.";
     }
 
-    if (address.length < 5) {
-      alert("Address must be at least 5 characters long.");
-      return;
+    if (data.address.length < 5) {
+      errors.address = "Address must be at least 5 characters long.";
     }
 
-    if (quantity <= 0) {
-      alert("Quantity must be at least 1.");
-      return;
+    if (data.quantity <= 0) {
+      errors.quantity = "Quantity must be at least 1.";
     }
 
-    const orderData = {
-      name: name,
-      email: email,
-      phone: phone,
-      address: address,
-      quantity: quantity,
-      contactMethod: contactMethod,
-      additionalServices: additionalServices,
-    };
+    return errors;
+  }
+
+  function displayErrors(errors) {
+    document.querySelectorAll(".error").forEach((el) => el.remove());
+    for (const [field, message] of Object.entries(errors)) {
+      const input = document.getElementById(
+        `order${field.charAt(0).toUpperCase() + field.slice(1)}`,
+      );
+      const errorElement = document.createElement("p");
+      errorElement.textContent = message;
+      errorElement.classList.add("error");
+      input.insertAdjacentElement("afterend", errorElement);
+    }
+  }
+
+  function handleOrderSubmit(event) {
+    event.preventDefault();
+    const orderData = getOrderData();
+    const errors = validateOrderData(orderData);
+
+    if (Object.keys(errors).length > 0) {
+      displayErrors(errors);
+      return;
+    }
 
     console.log("Order submitted:", orderData);
     alert("Order submitted successfully!");
 
     orderForm.reset();
     orderFormContainer.classList.add("hidden");
-  });
+  }
+
+  orderForm.addEventListener("submit", handleOrderSubmit);
 
   createStore();
 });
